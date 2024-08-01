@@ -1,4 +1,4 @@
-#!/work/mccleary_group/vassilakis.g/miniconda3/envs/astrometry-net/bin/python
+#!/usr/bin/env python3
 
 import argparse
 from astropy.io import fits
@@ -6,7 +6,7 @@ import sip_tpv
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Convert SIP headers to TPV headers in FITS files.')
-parser.add_argument('files', metavar='F', type=str, nargs='+',
+parser.add_argument('--files', metavar='F', type=str, nargs='+',
                     help='A list of FITS files to convert SIP to TPV headers for')
 
 # Parse command line arguments
