@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import argparse
 from astropy.io import fits
@@ -24,10 +26,10 @@ def remove_astrometry_data(fits_file):
 
 def main():
     parser = argparse.ArgumentParser(description='Remove astrometry data from FITS file headers.')
-    parser.add_argument('fits_files', metavar='FITS_FILES', type=str, nargs='+', help='Paths to the FITS files to process.')
+    parser.add_argument('--files', metavar='FITS_FILES', type=str, nargs='+', help='Paths to the FITS files to process.')
     args = parser.parse_args()
 
-    for fits_file in args.fits_files:
+    for fits_file in args.files:
         if os.path.isfile(fits_file) and fits_file.endswith(".fits"):
             remove_astrometry_data(fits_file)
         else:
