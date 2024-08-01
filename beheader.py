@@ -29,11 +29,19 @@ def main():
     parser.add_argument('--files', metavar='FITS_FILES', type=str, nargs='+', help='Paths to the FITS files to process.')
     args = parser.parse_args()
 
+    status_counter = 0
+
     for fits_file in args.files:
         if os.path.isfile(fits_file) and fits_file.endswith(".fits"):
             remove_astrometry_data(fits_file)
+
         else:
             print(f"Skipping {fits_file}: Not a valid FITS file")
+
+        # Update status counter and print every 200 files
+        status_counter += 1
+        if status_counter % 200 == 0:
+            print(f"Processed {status_counter} files. {len(args.files) - status_counter} files remaining.")
 
 if __name__ == "__main__":
     main()

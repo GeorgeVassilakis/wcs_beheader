@@ -22,8 +22,16 @@ def convert_sip_to_tpv(fits_filename):
         hdul.writeto(fits_filename, overwrite=True)
         print(f"Converted {fits_filename}")
 
+# Status counter
+status_counter = 0
+
 # Iterate over the provided FITS files and convert their headers
 for file in args.files:
     convert_sip_to_tpv(file)
+
+    # Update status counter and print every 200 files
+    status_counter += 1
+    if status_counter % 200 == 0:
+        print(f"Processed {status_counter} files. {len(args.files) - status_counter} files remaining.")
 
 print("Files converted")
