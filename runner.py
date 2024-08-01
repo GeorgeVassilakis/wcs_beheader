@@ -20,6 +20,10 @@ def run_script(script_name, argdirectory, argfiles):
     # If a directory is provided, get the list of files in the directory
     if argdirectory:
         files = [f for f in os.listdir(args.dir) if f.endswith('.fits')]
+
+        # Prepend the directory to the file names
+        files = [os.path.join(args.dir, f) for f in files]
+
     else:
         files = argfiles
 
