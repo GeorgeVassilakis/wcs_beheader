@@ -24,7 +24,7 @@ def run_script(script_name, argdirectory, argfiles):
         files = argfiles
 
     # Construct the command to run the script
-    command = ['python3', script_name, '--fits_files'] + files
+    command = ['python3', script_name, '--files'] + files
 
     print(f"Running command: {' '.join(command)}")
     subprocess.run(command, check=True)
