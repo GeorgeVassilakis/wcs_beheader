@@ -1,4 +1,4 @@
-#!/work/mccleary_group/vassilakis.g/miniconda3/envs/astrometry-net/bin/python
+#!/usr/bin/env python3
 
 import os
 import shutil
@@ -8,8 +8,7 @@ from astropy.io import fits
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Solve field and update FITS file headers.')
-parser.add_argument('files', metavar='F', type=str, nargs='+',
-                    help='A list of files to solve field and update headers for')
+parser.add_argument('--files', metavar='F', type=str, nargs='+', help='A list of files to solve field and update headers for')
 
 # Parse command line arguments
 args = parser.parse_args()
