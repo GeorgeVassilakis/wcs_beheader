@@ -1,4 +1,4 @@
-#!/work/mccleary_group/vassilakis.g/miniconda3/envs/astrometry-net/bin/python
+#!/usr/bin/env python3
 
 import os
 import shutil
@@ -8,8 +8,7 @@ from astropy.io import fits
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Solve field and update FITS file headers.')
-parser.add_argument('files', metavar='F', type=str, nargs='+',
-                    help='A list of files to solve field and update headers for')
+parser.add_argument('--files', metavar='F', type=str, nargs='+', help='A list of files to solve field and update headers for')
 
 # Parse command line arguments
 args = parser.parse_args()
@@ -37,6 +36,9 @@ print(f"Running command: {' '.join(solve_field_cmd)}")
 print(f"Running solve-field on all files: {args.files}")
 subprocess.run(solve_field_cmd)
 
+# Status counter
+status_counter = 0
+
 # Iterate over files to update the WCS information
 for file in args.files:
     # construct the file paths
@@ -63,5 +65,10 @@ for file in args.files:
     shutil.move(old_file + ".temp", old_file)
 
     print(f"Header updated successfully for {file}")
+
+    # Update status counter and print every 200 files
+    status_counter += 1
+    if status_counter % 200 == 0:
+        print(f"Processed {status_counter} files. {len(args.files) - status_counter} files remaining.")
 
 print("All operations completed.")
