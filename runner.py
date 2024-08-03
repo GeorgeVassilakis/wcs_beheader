@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import subprocess
 import os
 
 # Set up argument parser (take in a list of files or a directory)
@@ -28,10 +27,12 @@ def run_script(script_name, argdirectory, argfiles):
         files = argfiles
 
     # Construct the command to run the script
-    command = ['python3', script_name, '--files'] + files
+    command = 'python3 ' + script_name + ' --files ' + ' '.join(files)
 
-    print(f"Running command: {' '.join(command)}")
-    subprocess.run(command, check=True)
+    # Run the command
+    print(f"Running command: {command}")
+    os.system(command)
+
 
 # Run beheader.py
 run_script('beheader.py', args.dir, args.files)
