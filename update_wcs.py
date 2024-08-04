@@ -47,20 +47,20 @@ for file in args.files:
     if not os.path.exists(new_file):
         print(f"New FITS file {new_file} does not exist. Skipping header update for {file}.")
         continue
+    else:
+        # open the old fits file
+        with fits.open(old_file) as hdul_old:
+            # open the new fits file
+            with fits.open(new_file) as hdul_new:
+                # replace the header of the old file with that of the new file
+                hdul_old[0].header = hdul_new[0].header
+                # write the changes to a temporary fits file
+                hdul_old.writeto(old_file + ".temp", overwrite=True)
 
-    # open the old fits file
-    with fits.open(old_file) as hdul_old:
-        # open the new fits file
-        with fits.open(new_file) as hdul_new:
-            # replace the header of the old file with that of the new file
-            hdul_old[0].header = hdul_new[0].header
-            # write the changes to a temporary fits file
-            hdul_old.writeto(old_file + ".temp", overwrite=True)
-
-    # remove the old fits file
-    os.remove(old_file)
-    # rename the temporary fits file to the old fits file name
-    shutil.move(old_file + ".temp", old_file)
+        # remove the old fits file
+        os.remove(old_file)
+        # rename the temporary fits file to the old fits file name
+        shutil.move(old_file + ".temp", old_file)
 
     print(f"Header updated successfully for {file}")
 
