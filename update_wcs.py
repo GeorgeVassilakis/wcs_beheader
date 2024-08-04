@@ -23,7 +23,7 @@ if not os.path.exists(new_dir):
 
 # Solve field command
 solve_field_cmd = ['solve-field', '--scale-low', '0.1', '--scale-high', '180.0', '--scale-units', 'degwidth',
-                   '--downsample', '2', '--objs', '1000', '--tweak-order', '4', '--overwrite', '-D', new_dir]
+                   '--downsample', '1', '--objs', '1000', '--tweak-order', '4', '--overwrite', '-D', new_dir]
 solve_field_cmd = ' '.join(solve_field_cmd)
 
 # Number of threads to use
