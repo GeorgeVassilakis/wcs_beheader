@@ -33,14 +33,16 @@ def run_script(script_name, argdirectory, argfiles):
     print(f"Running command: {command}")
     os.system(command)
 
+# Get path to runner.py
+runner_path = os.path.abspath(__file__)
 
 # Run beheader.py
-run_script('beheader.py', args.dir, args.files)
+run_script(runner_path.replace('runner.py', 'beheader.py'), args.dir, args.files)
 
 # Run update_wcs.py
-run_script('update_wcs.py', args.dir, args.files)
+run_script(runner_path.replace('runner.py', 'update_wcs.py'), args.dir, args.files)
 
 # Run sip_to_tpv.py
-run_script('sip_to_tpv.py', args.dir, args.files)
+run_script(runner_path.replace('runner.py', 'sip_to_tpv.py'), args.dir, args.files)
 
 print("All operations completed.")
