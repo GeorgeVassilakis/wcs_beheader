@@ -29,7 +29,10 @@ def run_script(script_name, argdirectory, argfiles, argnum_threads=None):
         files = argfiles
 
     # Construct the command to run the script
-    command = 'python3 ' + script_name + ' --files ' + ' '.join(files) + ' --num_threads ' + str(argnum_threads)
+    if argnum_threads is None:
+        command = 'python3 ' + script_name + ' --files ' + ' '.join(files)
+    else:
+        command = 'python3 ' + script_name + ' --files ' + ' '.join(files) + ' --num_threads ' + str(argnum_threads)
 
     # Run the command
     print(f"Running command: {command}")
