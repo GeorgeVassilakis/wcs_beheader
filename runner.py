@@ -11,6 +11,8 @@ group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('--files', metavar='F', type=str, nargs='+', help='A list of files to run the scripts on.')
 group.add_argument('--dir', type=str, help='A directory of files to run the scripts on.')
 
+parser.add_argument('--num_threads', type=int, default=30, help='Number of threads to use for solve-field command')
+
 # Parse command line arguments
 args = parser.parse_args()
 
@@ -40,7 +42,7 @@ runner_path = os.path.abspath(__file__)
 run_script(runner_path.replace('runner.py', 'beheader.py'), args.dir, args.files)
 
 # Run update_wcs.py
-run_script(runner_path.replace('runner.py', 'update_wcs.py'), args.dir, args.files)
+run_script(runner_path.replace('runner.py', 'update_wcs.py'), args.dir, args.files, args.num_threads)
 
 # Run sip_to_tpv.py
 run_script(runner_path.replace('runner.py', 'sip_to_tpv.py'), args.dir, args.files)

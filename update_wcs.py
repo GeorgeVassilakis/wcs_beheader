@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Solve field and update FITS file headers.')
 parser.add_argument('--files', metavar='F', type=str, nargs='+', help='A list of files to solve field and update headers for')
+parser.add_argument('--num_threads', type=int, default=30, help='Number of threads to use for solve-field command')
 
 # Parse command line arguments
 args = parser.parse_args()
@@ -27,7 +28,7 @@ solve_field_cmd = ['solve-field', '--scale-low', '0.1', '--scale-high', '180.0',
 solve_field_cmd = ' '.join(solve_field_cmd)
 
 # Number of threads to use
-num_threads = 30
+num_threads = args.num_threads
 
 # Run solve-field command on all files using multiple threads
 print(f"Running solve-field on all files using {num_threads} threads.")
