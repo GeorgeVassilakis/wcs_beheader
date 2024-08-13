@@ -16,7 +16,7 @@ parser.add_argument('--num_threads', type=int, default=30, help='Number of threa
 # Parse command line arguments
 args = parser.parse_args()
 
-def run_script(script_name, argdirectory, argfiles):
+def run_script(script_name, argdirectory, argfiles, argnum_threads=None):
 
     # If a directory is provided, get the list of files in the directory
     if argdirectory:
@@ -29,7 +29,7 @@ def run_script(script_name, argdirectory, argfiles):
         files = argfiles
 
     # Construct the command to run the script
-    command = 'python3 ' + script_name + ' --files ' + ' '.join(files)
+    command = 'python3 ' + script_name + ' --files ' + ' '.join(files) + ' --num_threads ' + str(argnum_threads)
 
     # Run the command
     print(f"Running command: {command}")
